@@ -2,7 +2,6 @@
 
 body {
     font-family: 'Neucha', cursive;
-    font-weight: bold;
 }
 
 #cover {
@@ -59,7 +58,7 @@ form:before {
 }
 
 label {
-    font-weight: bold;
+
     font-size: 20px;
 }
 
@@ -69,4 +68,15 @@ input, select {
 
 option:hover {
     box-shadow: 0 0 10px 100px orange inset!important;
+}
+
+.feedback:first-of-type {
+    margin-top: 50px;
+}
+.feedback img {
+    width: 40px;
+}
+
+.feedback-title {
+    /*margin-bottom: 10px;*/
 }

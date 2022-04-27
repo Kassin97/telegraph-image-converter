@@ -10,6 +10,8 @@
 
     <link rel="stylesheet" href="src/css/main.css">
     <link rel="icon" type="image/x-icon" href="src/img/favicon.ico">
+    <script src="src/js/libs/jquery-3.6.0.min.js"></script>
+    <script src="src/js/script.js"></script>
 </head>
 <body>
 <section id="cover" class="min-vh-100">
@@ -20,23 +22,35 @@
                     <h1 class="display-4 py-2 main-title">Парсер картинок з Telegraph</h1>
                     <p class="desc-item">Дозволяє зібрати картинки із сторінки Telegraph в один файл</p>
                     <p class="desc-item">Вставте посилання, виберіть потрібний формат файлу і жмякайте кнопку</p>
-                    <form>
+                    <form method="get" id="main-form" action="/">
                         <div class="form-group">
                             <label for="exampleInputEmail1">Посилання</label>
-                            <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp"
-                                   placeholder="https://telegra.ph/...">
+                            <input type="text" class="form-control" id="exampleInputEmail1"
+                                   placeholder="https://telegra.ph/..." required name="link" autocomplete="off">
                         </div>
                         <div class="form-group">
                             <label for="exampleInputPassword1">Тип файлу</label>
-                            <select class="custom-select">
+                            <select class="custom-select" required name="file-type" autocomplete="off">
+                                <option value="">не вибрано</option>
                                 <option value="pdf">pdf</option>
                                 <option value="mobi">mobi</option>
                                 <option value="epub">epub</option>
                             </select>
                         </div>
-
-                        <button type="button" class="btn btn-dark btn-lg btn-submit">Запустити магію ❤</button>
+                        <button type="submit" class="btn btn-dark btn-lg btn-submit">Запустити ❤</button>
                     </form>
+
+
+                    <div class="feedback">
+                        <div class="feedback-title">Розроблено для <b>s0fko</b></div>
+                    </div>
+                    <div class="feedback">
+                        <div class="feedback-title">
+                            Похвалити/Посварити можна <a target="_blank" href="https://t.me/roman_komarnytsky">тут</a>
+                        </div>
+                    </div>
+
+
 
                 </div>
             </div>
