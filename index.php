@@ -57,5 +57,9 @@
         </div>
     </div>
 </section>
+
+<div class="loading">
+    <div class="loader"></div>
+</div>
 </body>
 </html>
