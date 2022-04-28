@@ -34,7 +34,6 @@
                                 <option value="">не вибрано</option>
                                 <option value="pdf">pdf</option>
                                 <option value="mobi">mobi</option>
-                                <option value="epub">epub</option>
                             </select>
                         </div>
                         <button type="submit" class="btn btn-dark btn-lg btn-submit">Запустити ❤</button>
