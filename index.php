@@ -25,7 +25,7 @@
                     <form method="get" id="main-form" action="/">
                         <div class="form-group">
                             <label for="exampleInputEmail1">Посилання</label>
-                            <input type="text" class="form-control" id="exampleInputEmail1"
+                            <input type="url" class="form-control" id="exampleInputEmail1"
                                    placeholder="https://telegra.ph/..." required name="link" autocomplete="off">
                         </div>
                         <div class="form-group">
