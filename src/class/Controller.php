@@ -1,6 +1,6 @@
 <?php
 use PHPHtmlParser\Dom;
-
+ini_set("display_errors", true);
 class Controller
 {
     const TEMP_FOLDER = __DIR__.'/../../temp';
@@ -11,6 +11,7 @@ class Controller
 
     public function init($request)
     {
+        $this->lastError = false;
         $this->request = $request;
         if ($this->request['link'] && $this->request['file-type']) {
             $this->dom = new Dom();
@@ -18,10 +19,12 @@ class Controller
         } else {
             $this->lastError = 'Прийшли не всі параметри, заповніть форму ще раз';
         }
+        return $this->lastError;
     }
 
-    private function runParse()
+    private function runParse():string
     {
+        $srcFile = false;
         if ($this->createTempFolder()) {
             $allHtml = $this->getHtml();
             if (!empty($allHtml)) {
@@ -36,12 +39,19 @@ class Controller
                 }
                 switch ($this->request['file-type']) {
                     case "pdf":
-                        (new PdfCreator($this->folderPath, $title))->create();
+                        $srcFile = (new PdfCreator($this->folderPath, $title))->create();
                         break;
                 }
             } else {
                 $this->lastError = 'Не вдалося прочитати сторінку, перевірте коректність посилання';
             }
+        }
+        if (!$srcFile) $this->lastError = 'Не вдалося створити файл :(';
+
+        if (!$this->lastError && $srcFile) {
+            return str_replace($_SERVER['DOCUMENT_ROOT'], '',$srcFile);
+        } else {
+            return $this->lastError;
         }
     }
 

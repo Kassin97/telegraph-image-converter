@@ -1,6 +1,7 @@
 {
   "require": {
-    "paquettg/php-html-parser": "^3.1"
+    "paquettg/php-html-parser": "^3.1",
+    "mpdf/mpdf": "^8.1"
   },
   "autoload": {
     "classmap": [

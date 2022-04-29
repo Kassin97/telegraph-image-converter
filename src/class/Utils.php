@@ -36,5 +36,15 @@ class Utils
         return $arFiles;
     }
 
+    public static function getFilesList($path)
+    {
+        $result = scandir($path);
+        unset($result[0]);
+        unset($result[1]);
+        return $result;
+    }
+
+
+
 
 }
