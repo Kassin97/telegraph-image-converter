@@ -17,12 +17,28 @@ class Controller
         $this->request = $request;
         $this->request['file-type'] = 'pdf';
         if ($this->request['link'] && $this->request['file-type']) {
-            $this->dom = new Dom();
-            return ['result' => $this->runParse()];
+            if ($this->checkLink($this->request['link'])) {
+                $this->dom = new Dom();
+                return ['result' => $this->runParse()];
+            }
         } else {
             $this->lastError = 'Прийшли не всі параметри, заповніть форму ще раз';
         }
         return ['error' => $this->lastError];
+    }
+
+    public function checkLink($link):bool
+    {
+        if (!stristr("https://telegra.ph/", $link)) {
+            $this->lastError = 'Введіть посилання на телеграф';
+            return false;
+        } elseif ($link === 'https://telegra.ph/') {
+            $this->lastError = 'Потрібно ввести посилання на конкретну статтю';
+            return false;
+        }
+        else {
+            return true;
+        }
     }
 
     private function runParse()
