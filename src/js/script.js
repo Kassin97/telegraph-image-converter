@@ -8,8 +8,20 @@ $(document).ready(function (){
             beforeSend: function () {
                 $('.loading').show();
             },
-            success: function () {
-
+            success: function (jsonResult) {
+                jsonResult = JSON.parse(jsonResult);
+                if (jsonResult.error) {
+                    $('.error').text(jsonResult.error);
+                } else {
+                    $('.error').text("");
+                    var a = document.createElement("a");
+                    a.href = jsonResult.result.src;
+                    document.body.appendChild(a);
+                    a.download = jsonResult.result.name;
+                    a.click();
+                    a.remove();
+                }
+                $('.loading').hide();
             },
         });
         return false;

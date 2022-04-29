@@ -20,22 +20,27 @@
             <div class="row text-white">
                 <div class="col-xl-6 col-lg-7 col-md-9 col-sm-11 mx-auto text-center form p-4 form-container">
                     <h1 class="display-4 py-2 main-title">Парсер картинок з Telegraph</h1>
-                    <p class="desc-item">Дозволяє зібрати картинки із сторінки Telegraph в один файл</p>
-                    <p class="desc-item">Вставте посилання, виберіть потрібний формат файлу і жмякайте кнопку</p>
+                    <p class="desc-item">Дозволяє зібрати картинки із сторінки Telegraph в один PDF файл</p>
+                    <p class="desc-item">PDF файл при потребі зручно конвертувати в будь-який інший формат, наприклад
+                        це можна буде зробити на цьому сайті
+                        <a target="_blank" href="https://convertio.co/pdf-epub/">convertio.co</a>
+                    </p>
                     <form method="get" id="main-form" action="/">
                         <div class="form-group">
-                            <label for="exampleInputEmail1">Посилання</label>
+                            <label for="exampleInputEmail1">Вставте посилання і жмякайте кнопку</label>
                             <input type="url" class="form-control" id="exampleInputEmail1"
-                                   placeholder="https://telegra.ph/..." required name="link" autocomplete="off">
+                                   placeholder="https://telegra.ph/..." required name="link" autocomplete="off"
+                            value="<?=$_REQUEST['link'];?>">
                         </div>
-                        <div class="form-group">
-                            <label for="exampleInputPassword1">Тип файлу</label>
-                            <select class="custom-select" required name="file-type" autocomplete="off">
-                                <option value="">не вибрано</option>
-                                <option value="pdf">pdf</option>
-                                <option value="mobi">mobi</option>
-                            </select>
-                        </div>
+<!--                        <div class="form-group">-->
+<!--                            <label for="exampleInputPassword1">Тип файлу</label>-->
+<!--                            <select class="custom-select" required name="file-type" autocomplete="off">-->
+<!--                                <option value="">не вибрано</option>-->
+<!--                                <option value="pdf">pdf</option>-->
+<!--                                <option value="mobi">mobi</option>-->
+<!--                            </select>-->
+<!--                        </div>-->
+                        <div class="error"></div>
                         <button type="submit" class="btn btn-dark btn-lg btn-submit">Запустити ❤</button>
                     </form>
 

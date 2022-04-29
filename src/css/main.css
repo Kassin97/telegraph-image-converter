@@ -59,7 +59,7 @@ form:before {
 
 label {
     display: block;
-    text-align: left;
+    /*text-align: left;*/
     font-size: 20px;
 }
 
@@ -124,4 +124,11 @@ a, a:hover {
 
 a:hover {
     text-decoration: underline;
+}
+
+.error {
+    color: red;
+    font-size: 20px;
+    margin: 15px 0;
+
 }

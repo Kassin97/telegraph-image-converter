@@ -1,9 +1,11 @@
 <?php
+
 use PHPHtmlParser\Dom;
+
 ini_set("display_errors", true);
+
 class Controller
 {
-    const TEMP_FOLDER = __DIR__.'/../../temp';
     private array $request;
     private string $lastError;
     private Dom $dom;
@@ -13,16 +15,17 @@ class Controller
     {
         $this->lastError = false;
         $this->request = $request;
+        $this->request['file-type'] = 'pdf';
         if ($this->request['link'] && $this->request['file-type']) {
             $this->dom = new Dom();
-            return $this->runParse();
+            return ['result' => $this->runParse()];
         } else {
             $this->lastError = 'Прийшли не всі параметри, заповніть форму ще раз';
         }
-        return $this->lastError;
+        return ['error' => $this->lastError];
     }
 
-    private function runParse():string
+    private function runParse()
     {
         $srcFile = false;
         if ($this->createTempFolder()) {
@@ -32,7 +35,6 @@ class Controller
                 $imageTags = $this->dom->find("#_tl_editor img");
                 $title = $this->dom->find('.tl_article_header h1')[0]->text;
                 foreach ($imageTags as $i => $imageTag) {
-                    if ($i > 3) continue;
                     if (!$this->saveImage($imageTag->src, $i + 1)) {
                         return $this->returnError();
                     }
@@ -49,15 +51,16 @@ class Controller
         if (!$srcFile) $this->lastError = 'Не вдалося створити файл :(';
 
         if (!$this->lastError && $srcFile) {
-            return str_replace($_SERVER['DOCUMENT_ROOT'], '',$srcFile);
+            $srcResult = str_replace($_SERVER['DOCUMENT_ROOT'], '', $srcFile);
+            return ['src' => $srcResult, 'name' => $title . "." . $this->request['file-type']];
         } else {
             return $this->lastError;
         }
     }
 
-    private function createTempFolder():bool
+    private function createTempFolder(): bool
     {
-        $this->folderPath = $_SERVER['DOCUMENT_ROOT'] . '/upload/' .$_SERVER['REMOTE_ADDR'];
+        $this->folderPath = $_SERVER['DOCUMENT_ROOT'] . '/upload/' . $_SERVER['REMOTE_ADDR'];
         if (is_dir($this->folderPath)) {
             Utils::deleteDir($this->folderPath);
         }
@@ -87,7 +90,7 @@ class Controller
         return true;
     }
 
-    private function returnError():string
+    private function returnError(): string
     {
         return json_encode(['error' => $this->lastError]);
     }
