@@ -29,7 +29,7 @@ class Controller
 
     public function checkLink($link):bool
     {
-        if (!stristr("https://telegra.ph/", $link)) {
+        if (!stristr($link,"https://telegra.ph/")) {
             $this->lastError = 'Введіть посилання на телеграф';
             return false;
         } elseif ($link === 'https://telegra.ph/') {
@@ -44,6 +44,7 @@ class Controller
     private function runParse()
     {
         $srcFile = false;
+        $title = 'Без назви';
         if ($this->createTempFolder()) {
             $allHtml = $this->getHtml();
             if (!empty($allHtml)) {
